@@ -130,7 +130,7 @@ Add the **LRE Pagination** element to paginate results:
 2. Target your query loop container
 3. Style the pagination controls
 
-See [Pagination](./pagination) for detailed configuration.
+See [Pagination Element](./event-elements#pagination-element) for detailed configuration.
 
 ## Performance Tips
 
