@@ -1,0 +1,8 @@
+{
+  "label": "Shortcodes",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "description": "Display event information using shortcodes."
+  }
+}
