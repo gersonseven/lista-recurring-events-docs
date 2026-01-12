@@ -81,8 +81,13 @@ const config = {
               label: 'Documentation',
             },
             {
-              href: 'https://developer.listapage.io',
-              label: 'Listapage',
+              href: 'https://lre-changelog.listapage.au',
+              label: 'Changelog',
+              position: 'left',
+            },
+            {
+              href: 'https://listapage.au/custom-wordpress-plugins/recurring-events/',
+              label: 'LRE Landing Page',
               position: 'right',
             },
           ],
@@ -127,6 +132,10 @@ const config = {
             {
               title: 'Resources',
               items: [
+                {
+                  label: 'Changelog',
+                  href: 'https://lre-changelog.listapage.au',
+                },
                 {
                   label: 'Developers',
                   to: '/developers/php-functions',
