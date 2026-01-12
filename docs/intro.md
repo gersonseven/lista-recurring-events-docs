@@ -40,7 +40,7 @@ This approach keeps your database clean, makes updates simple (change once, upda
 |------------|---------|
 | WordPress | 6.8 or higher |
 | PHP | 8.1 or higher |
-| Page Builder | Bricks Builder or Elementor Pro (optional) |
+| Page Builder | Bricks Builder or Elementor (optional) |
 
 ## Free vs Pro Features
 

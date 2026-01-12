@@ -12,7 +12,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config = {
   title: 'Lista Recurring Events',
   tagline: 'Documentation for the Lista Recurring Events WordPress Plugin',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/lre-logo.png',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {

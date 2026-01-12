@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Recurring Events Loop Widget
 
-Display recurring events in Elementor using the dedicated loop widget.
+Display recurring events in Elementor (the free version) using the dedicated loop widget.
 
 ## Overview
 
