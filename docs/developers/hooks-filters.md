@@ -285,3 +285,192 @@ function my_addon_settings_content() {
 3. **Return filtered values** — Always return something from filters
 4. **Namespace your functions** — Avoid conflicts with other code
 5. **Document your hooks** — Help users understand your add-on's extension points
+
+---
+
+## Occurrence Change Hooks
+
+These action hooks fire when occurrences are modified. They're designed for notification systems, activity logging, and third-party integrations.
+
+### lre_occurrence_changed
+
+Fires when any occurrence change is detected (cancellation, restoration, reschedule, or override change).
+
+```php
+add_action('lre_occurrence_changed', function($post_id, $date, $change_type, $data) {
+    // $change_type: 'cancelled', 'restored', 'rescheduled', 'override_added', etc.
+    error_log("Event {$post_id}: occurrence {$date} was {$change_type}");
+}, 10, 4);
+```
+
+**Parameters:**
+- `$post_id` (int) — Event post ID
+- `$date` (string) — Occurrence date (Y-m-d)
+- `$change_type` (string) — Type of change
+- `$data` (array) — Additional data about the change
+
+---
+
+### lre_occurrence_cancelled
+
+Fires when an occurrence is cancelled (excluded).
+
+```php
+add_action('lre_occurrence_cancelled', function($post_id, $date) {
+    // Notify registered attendees
+    notify_attendees_of_cancellation($post_id, $date);
+}, 10, 2);
+```
+
+---
+
+### lre_occurrence_restored
+
+Fires when a previously cancelled occurrence is restored.
+
+```php
+add_action('lre_occurrence_restored', function($post_id, $date) {
+    // Re-enable registration
+}, 10, 2);
+```
+
+---
+
+### lre_occurrence_rescheduled
+
+Fires when an occurrence is moved to a different date.
+
+```php
+add_action('lre_occurrence_rescheduled', function($post_id, $original_date, $new_date) {
+    // Notify attendees of date change
+}, 10, 3);
+```
+
+---
+
+### lre_occurrence_changes_complete
+
+Fires after all occurrence changes for a single save operation are processed. Useful for batching notifications.
+
+```php
+add_action('lre_occurrence_changes_complete', function($post_id, $changes) {
+    // $changes is an array of all changes made in this save
+    // Send a single digest email instead of one per change
+    send_change_digest($post_id, $changes);
+}, 10, 2);
+```
+
+---
+
+### lre_occurrences_regenerated
+
+Fires after stored occurrences are regenerated for an event (e.g., after saving recurrence settings).
+
+```php
+add_action('lre_occurrences_regenerated', function($post_id, $count) {
+    error_log("Regenerated {$count} occurrences for event {$post_id}");
+}, 10, 2);
+```
+
+:::tip
+During bulk regeneration, individual occurrence hooks (`lre_occurrence_changed`, etc.) are automatically suppressed to prevent hook spam. Only `lre_occurrences_regenerated` fires.
+:::
+
+---
+
+## Schema Filters
+
+### lre_schema_event_data
+
+Modify the complete Schema.org data array before JSON-LD output.
+
+```php
+add_filter('lre_schema_event_data', function($data, $post_id, $date) {
+    $data['performer'] = [
+        '@type' => 'Person',
+        'name'  => get_post_meta($post_id, 'performer_name', true),
+    ];
+    return $data;
+}, 10, 3);
+```
+
+---
+
+### lre_schema_enabled
+
+Conditionally enable or disable schema output per event.
+
+```php
+add_filter('lre_schema_enabled', function($enabled, $post_id) {
+    // Disable for private events
+    if (get_post_meta($post_id, 'is_private', true)) {
+        return false;
+    }
+    return $enabled;
+}, 10, 2);
+```
+
+---
+
+### lre_schema_location_data
+
+Modify the location data in the schema output.
+
+```php
+add_filter('lre_schema_location_data', function($location, $post_id) {
+    // Add geo coordinates
+    $location['geo'] = [
+        '@type' => 'GeoCoordinates',
+        'latitude' => get_post_meta($post_id, 'venue_lat', true),
+        'longitude' => get_post_meta($post_id, 'venue_lng', true),
+    ];
+    return $location;
+}, 10, 2);
+```
+
+---
+
+## Event Status Filters
+
+### lre_event_statuses
+
+Add or modify available event status options.
+
+```php
+add_filter('lre_event_statuses', function($statuses) {
+    $statuses['sold_out'] = __('Sold Out', 'my-theme');
+    return $statuses;
+});
+```
+
+---
+
+### lre_resolved_event_status
+
+Modify the resolved status for a specific occurrence.
+
+```php
+add_filter('lre_resolved_event_status', function($status, $post_id, $date) {
+    // Force cancelled status for past events
+    if (strtotime($date) < time()) {
+        return 'completed';
+    }
+    return $status;
+}, 10, 3);
+```
+
+---
+
+### lre_resolved_event_label
+
+Modify the resolved display label for a specific occurrence.
+
+```php
+add_filter('lre_resolved_event_label', function($label, $post_id, $date) {
+    // Add "FULL" label if capacity reached
+    if (is_event_at_capacity($post_id, $date)) {
+        return __('Sold Out', 'my-theme');
+    }
+    return $label;
+}, 10, 3);
+```

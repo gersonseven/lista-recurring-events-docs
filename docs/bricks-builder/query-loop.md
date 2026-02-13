@@ -46,7 +46,7 @@ Once Recurring Events is selected, you'll see custom options:
 | Option | Description | Default |
 |--------|-------------|---------|
 | **Post Type** | Which post type(s) to query | All configured |
-| **Hide Past Events** | Only show future occurrences | On |
+| **Event Scope** | Upcoming events only, All events, or Past events only | Upcoming |
 | **Order By** | Sort criterion | Next Occurrence |
 | **Order** | Ascending or Descending | Ascending |
 | **Include Non-Recurring** | Include one-time events | On |
@@ -134,7 +134,7 @@ See [Pagination Element](./event-elements#pagination-element) for detailed confi
 
 ## Performance Tips
 
-1. **Use reasonable limits** — Keep "Occurrences Per Event" low for better performance
-2. **Enable caching** — Ensure cache duration is set in plugin settings
+1. **Stored Occurrences** — The plugin uses pre-calculated occurrences stored in the database, making query loops significantly faster than on-demand calculation
+2. **Use reasonable limits** — Keep "Occurrences Per Event" low for better performance
 3. **Paginate large lists** — Use pagination instead of showing all events at once
-4. **Hide past events** — Reduces the number of calculations needed
+4. **Event Scope: Upcoming** — Reduces the result set by excluding past occurrences

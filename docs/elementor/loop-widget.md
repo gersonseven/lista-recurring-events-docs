@@ -129,6 +129,9 @@ Use these dynamic tags in your custom template:
 | **Featured Image** | LRE | Event thumbnail |
 | **Post Excerpt** | LRE | Event excerpt |
 | **Post Terms** | LRE | Category/tag list |
+| **Event Status** | LRE | Status label (Scheduled, Cancelled, etc.) |
+| **Event Label** | LRE | Custom display label |
+| **Countdown** | LRE | Relative time / countdown label |
 
 ### Using Tags
 
@@ -166,6 +169,34 @@ Button that loads additional events without page change.
 ### Infinite Scroll
 
 Automatically loads more events as user scrolls down.
+
+## Events Countdown Widget
+
+A standalone widget for displaying countdown or relative time labels.
+
+### Adding the Widget
+
+1. Search for **Events Countdown** in the Elementor panel
+2. Or find it in the **Lista Recurring Events** widget category
+3. Add it inside a Loop widget template or on a single event template
+
+### Content Tab
+
+| Setting | Description |
+|---------|-------------|
+| **Display Mode** | Smart Label, Countdown Units, or Compact Badge |
+| **Show Days** | Toggle days unit |
+| **Show Hours** | Toggle hours unit |
+| **Show Minutes** | Toggle minutes unit |
+| **Show Seconds** | Toggle seconds unit |
+
+### Style Tab
+
+Full control over typography, colors, spacing, and per-unit styling. Includes status-aware color controls for styling the "Happening now" state differently.
+
+See [Countdown & Relative Time](../features/countdown) for full details on display modes.
+
+---
 
 ## Free vs Pro Elementor
 

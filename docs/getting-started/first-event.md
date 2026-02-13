@@ -59,13 +59,13 @@ Event repeats on specific days of the week.
 
 Event occurs on a specific weekday of the month.
 
-- **Ordinal**: First, Second, Third, Fourth, or Last
+- **Ordinal**: First, Second, Third, Fourth, or Last (select multiple to combine, e.g., "1st and 3rd Tuesday")
 - **Weekday**: Sunday through Saturday
 - **Interval**: Every month, every 2 months, etc.
 
 **Examples:**
 - First Monday of every month
-- Second Tuesday every 2 months
+- First and Third Tuesday of every month
 - Last Friday of every month
 
 ![Monthly Nth Weekday](/img/monthly-nth-pattern.jpg)
@@ -113,6 +113,22 @@ Exclude specific dates from the recurrence pattern. Perfect for:
 4. Save changes
 
 ![Manage Exclusions](/img/manage-exclusions.jpg)
+
+## Event Schema Tab
+
+When Schema.org output is enabled in plugin settings, the **Event Schema** tab appears in the metabox with per-event options:
+
+### Event Status
+
+Set the event's status: Scheduled (default), Cancelled, Postponed, or Rescheduled. This is reflected in both the frontend display and the schema.org markup. See [Event Status & Labels](../features/event-status) for details.
+
+### Display Label
+
+Add a custom freeform label like "Sold Out", "Almost Full", or "Free Entry". This can be displayed on the frontend using the `{lre_event_label}` dynamic tag or `[lre_label]` shortcode.
+
+### Location & Organizer
+
+Override the global schema defaults for this specific event's venue name, address, and organizer details.
 
 ## Calendar Display Tab
 

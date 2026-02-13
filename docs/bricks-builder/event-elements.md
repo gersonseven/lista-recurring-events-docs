@@ -77,6 +77,57 @@ Shows a compact monthly calendar highlighting occurrence dates.
 
 ---
 
+## Countdown Element
+
+Display a contextual countdown or relative time label for upcoming events.
+
+### Adding the Element
+
+1. Search for **LRE Countdown** in the elements panel
+2. Add it inside a query loop or on a single event template
+
+### Display Modes
+
+#### Smart Label
+
+Natural-language output based on proximity: "Today at 2:00 pm", "Tomorrow at 9:00 am", "Starting in 45 minutes", or "Happening now".
+
+#### Countdown Units
+
+Structured countdown with individual time units that tick live:
+
+```
+3 days  12 hours  45 minutes  30 seconds
+```
+
+#### Compact Badge
+
+Minimal badge-style display for event cards:
+
+```
+3d 12h 45m
+```
+
+### Content Settings
+
+| Setting | Description |
+|---------|-------------|
+| **Display Mode** | Smart Label, Countdown Units, or Compact Badge |
+| **Show Days** | Toggle days unit |
+| **Show Hours** | Toggle hours unit |
+| **Show Minutes** | Toggle minutes unit |
+| **Show Seconds** | Toggle seconds unit |
+
+### Styling
+
+Full control over typography, colors, spacing, and per-unit styling. Status-aware color controls let you style the "Happening now" state differently from an active countdown.
+
+Styling controls are available in both Countdown Units and Compact Badge modes.
+
+See [Countdown & Relative Time](../features/countdown) for full details.
+
+---
+
 ## Pagination Element
 
 Add pagination to your Recurring Events query loops.

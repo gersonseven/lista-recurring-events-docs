@@ -51,6 +51,24 @@ In any Bricks text element or dynamic field:
 | `{lre_field:field_name}` | Override value or default |
 | `{lre_reschedule_note}` | Reschedule note for current occurrence |
 
+### Status & Label Tags
+
+| Tag | Output | Example |
+|-----|--------|---------  |
+| `{lre_event_status}` | Human-readable status | "Cancelled" |
+| `{lre_event_status_label}` | Status formatted for display | "Cancelled" |
+| `{lre_event_label}` | Custom display label | "Sold Out" |
+
+These tags can also be used in **Bricks conditions** to conditionally show or hide elements. For example, show a red badge only when `{lre_event_status}` equals `cancelled`.
+
+### Countdown Tag
+
+| Tag | Output | Example |
+|-----|--------|---------|
+| `{lre_countdown}` | Contextual time label | "Today at 2:00 pm" |
+
+Displays a smart label based on proximity to the occurrence. See [Countdown & Relative Time](../features/countdown) for all display modes.
+
 ## Using Tags in Elements
 
 ### In Headings

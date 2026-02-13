@@ -187,10 +187,26 @@ Ensure the filter is targeting the correct query loop:
 
 ### Slow Page Load
 
-1. Reduce "Occurrences Per Event" in query settings
-2. Lower "Default Occurrences" in plugin settings
-3. Increase cache duration
-4. Use pagination instead of showing all events
+1. Verify Stored Occurrences are working — check **Settings → Advanced → Data Information** for occurrence count
+2. Reduce "Occurrences Per Event" in query settings
+3. Use pagination instead of showing all events at once
+4. Clear any page caching plugins and test in incognito
+
+### Calendar Navigation Still Slow
+
+If calendar navigation is slow after upgrading to 1.5.0:
+
+1. Re-save your events to trigger stored occurrence generation
+2. Check that the `{prefix}_lre_occurrences` table exists in your database
+3. Verify the occurrence count in **Settings → Advanced → Data Information**
+
+### Stale or Missing Occurrences
+
+If events show incorrect or missing dates:
+
+1. Edit the event and click **Update** — this regenerates stored occurrences
+2. Check **Settings → Advanced → Data Information** to confirm occurrences are being stored
+3. If using "Never" end type, wait for the weekly background task to extend occurrences, or re-save the event
 
 ### Database Timeouts
 

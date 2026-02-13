@@ -13,15 +13,19 @@ Lista Recurring Events transforms your WordPress site into a full-featured event
 
 ## Key Features
 
-- **Smart Recurrence Calculation** — Define patterns once; occurrences are calculated dynamically
+- **Stored Occurrences Performance System** — Pre-calculated occurrences stored in a dedicated database table for instant calendar navigation and faster query loops
 - **Multiple Recurrence Patterns** — Daily, Weekly, Monthly (by weekday or date), Yearly, and Custom dates
-- **Bricks Builder Integration** — Custom query loop, dynamic data tags, and filter elements
-- **Elementor Integration** — Loop widget, dynamic tags, and filter widgets
+- **Bricks Builder Integration** — Custom query loop, dynamic data tags, filter elements, and countdown element
+- **Elementor Integration** — Loop widget, dynamic tags, filter widgets, and countdown widget
 - **Interactive Calendar** — Beautiful FullCalendar integration with the `[lre_calendar]` shortcode
+- **AJAX Filtering** — Date, taxonomy, search, and event type filters with smooth AJAX transitions
 - **Add to Calendar** — Let visitors save events to Google Calendar, Apple Calendar, Outlook, and more
+- **Event Status & Labels** — Mark events as Cancelled, Postponed, or Rescheduled, and add custom display labels like "Sold Out" or "Free Entry"
+- **Countdown & Relative Time** — Smart labels like "Today at 2:00 pm" and live countdown tickers
+- **Schema.org Structured Data** — Automatic JSON-LD markup for Google rich search results
+- **Native Events Mode** — Use the plugin without any custom field plugin — built-in Events post type included
 - **Field Overrides** — Set different values (title, image, location) for specific occurrences
 - **Multi-Post Type Support** — Configure multiple custom post types as event types
-- **Performance Optimized** — Intelligent caching prevents redundant calculations
 
 ## How It Works
 
@@ -29,7 +33,7 @@ Traditional event plugins require you to create a separate post for each occurre
 
 1. **One Post Per Event** — Create a single event post with your content
 2. **Set the Pattern** — Configure how often the event repeats
-3. **Automatic Calculation** — The plugin calculates all future occurrences on-the-fly
+3. **Stored Occurrences** — The plugin pre-calculates and stores all future occurrences in a dedicated database table
 4. **Dynamic Display** — Show upcoming dates using dynamic tags, shortcodes, or query loops
 
 This approach keeps your database clean, makes updates simple (change once, update everywhere), and provides flexibility for complex scheduling needs.
@@ -60,6 +64,10 @@ Lista Recurring Events offers both free and licensed functionality:
 - AJAX filtering
 - Full dynamic data tags
 - Field overrides per occurrence
+- Event Status & Display Labels
+- Countdown & Relative Time
+- Schema.org structured data
+- Native Events Mode
 
 [Purchase a license →](https://listapage.au/custom-wordpress-plugins/recurring-events/)
 

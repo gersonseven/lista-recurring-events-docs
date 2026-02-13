@@ -169,6 +169,8 @@ Yes, using the Add to Calendar feature. Supports Google Calendar, Apple Calendar
 All data is stored in your WordPress database:
 - Event content in `wp_posts`
 - Recurrence settings in `wp_postmeta`
+- Stored occurrences in `{prefix}_lre_occurrences` (dedicated table)
+- Activity log in `{prefix}_lre_activity_log` (dedicated table)
 - Cached calculations in `wp_options` (transients)
 
 ### Does the plugin send data externally?
@@ -182,6 +184,42 @@ Event data never leaves your server.
 ### Is the plugin GDPR compliant?
 
 The plugin itself doesn't collect user data. The Add to Calendar feature sends event data to third-party calendar services when users click to add an event.
+
+---
+
+## Performance
+
+### What are Stored Occurrences?
+
+Starting in version 1.5.0, the plugin pre-calculates and stores event occurrences in a dedicated database table instead of calculating them on every page load. This makes calendar navigation instant and query loops significantly faster.
+
+### Do I need to do anything to enable Stored Occurrences?
+
+No. When upgrading to 1.5.0, occurrences are generated automatically when events are saved. The plugin falls back to on-demand calculation for events that haven't been re-saved yet.
+
+### How are "never ending" events handled?
+
+Events with no end date have their stored occurrences automatically extended by a weekly background task using Action Scheduler or WP-Cron.
+
+---
+
+## New Features (1.5.0)
+
+### What is Native Events Mode?
+
+Native Events Mode lets you use the plugin without any custom field plugin (ACF, Meta Box, etc.). It registers a built-in Events post type with all necessary date, time, and location fields. See [Native Events Mode](../features/native-mode).
+
+### How does Schema.org output work?
+
+When enabled, the plugin automatically outputs JSON-LD structured data on single event pages, helping search engines understand your events and potentially showing rich results in Google Search. See [Schema.org Structured Data](../features/schema).
+
+### Can I mark events as cancelled or postponed?
+
+Yes. The Event Status feature lets you set events as Scheduled, Cancelled, Postponed, or Rescheduled — either for the whole event or for specific occurrences. See [Event Status & Labels](../features/event-status).
+
+### What is the Countdown feature?
+
+The Countdown feature shows contextual time labels like "Today at 2:00 pm", "Starting in 45 minutes", or a live ticking countdown. Available as a Bricks element, Elementor widget, dynamic tag, and shortcode. See [Countdown & Relative Time](../features/countdown).
 
 ---
 

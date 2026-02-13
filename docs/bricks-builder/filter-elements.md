@@ -151,6 +151,53 @@ Clear all active filters with one click.
 | **Button Text** | Label for the button |
 | **Hide When No Filters** | Auto-hide when nothing to reset |
 
+---
+
+## Active Filters Element
+
+Displays removable pills showing which filters are currently active. Users can click ✕ on any pill to remove that filter.
+
+### Settings
+
+| Setting | Description |
+|---------|-------------|
+| **Layout** | Inline (horizontal wrap) or Stacked (vertical) |
+| **Show Labels** | Display filter type labels |
+
+### Styling
+
+- Pill background, text, and border colors
+- Close button (✕) styling
+- Gap between pills
+- Typography and padding
+
+---
+
+## Apply Filters Element
+
+A button that applies all pending filter selections at once, instead of filtering on every change.
+
+### Settings
+
+| Setting | Description |
+|---------|-------------|
+| **Button Text** | Label for the button |
+| **Show Pending Count** | Display a badge with the number of pending filter changes |
+
+When the pending count badge is enabled, users can see how many filter selections haven't been applied yet.
+
+:::tip
+The Apply Filters element is useful when you have multiple filters and want users to make all their selections before triggering an AJAX request. Without it, each filter change triggers an immediate request.
+:::
+
+---
+
+## Size Controls
+
+All filter elements include **Width**, **Min Width**, and **Max Width** controls with responsive breakpoint support. This lets you precisely control how filter elements behave at different screen sizes.
+
+Access these controls in the **Style** tab of any filter element under the size/spacing section. Use Bricks' responsive controls to set different values per breakpoint.
+
 ## Filter Layout Tips
 
 ### Horizontal Filter Bar

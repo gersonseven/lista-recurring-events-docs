@@ -244,6 +244,82 @@ Displays the Add to Calendar button. See [Add to Calendar](../calendar/add-to-ca
 
 ---
 
+## Event Status & Label Shortcodes
+
+### [lre_status]
+
+Displays the event's current status.
+
+```
+[lre_status]
+[lre_status format="key"]
+[lre_status format="schema"]
+```
+
+| Attribute | Description | Default |
+|-----------|-------------|---------|
+| `id` | Post ID | Current post |
+| `format` | Output format: label, key, or schema | label |
+
+**Output by format:**
+
+| Format | Example Output |
+|--------|----------------|
+| `label` (default) | "Cancelled" |
+| `key` | "cancelled" |
+| `schema` | "EventCancelled" |
+
+See [Event Status & Labels](../features/event-status) for details.
+
+---
+
+### [lre_label]
+
+Displays the event's custom display label.
+
+```
+[lre_label]
+[lre_label id="123"]
+```
+
+| Attribute | Description | Default |
+|-----------|-------------|---------|
+| `id` | Post ID | Current post |
+
+**Output:** "Sold Out", "Almost Full", etc. — whatever you've entered for the event or occurrence.
+
+---
+
+## Countdown Shortcode
+
+### [lre_countdown]
+
+Displays a countdown or relative time label for an event.
+
+```
+[lre_countdown]
+[lre_countdown mode="units"]
+[lre_countdown mode="badge"]
+[lre_countdown id="123"]
+```
+
+| Attribute | Description | Default |
+|-----------|-------------|---------|
+| `id` | Post ID | Current post |
+| `mode` | Display mode: smart, units, badge | smart |
+
+**Output by mode:**
+
+| Mode | Example Output |
+|------|----------------|
+| `smart` | "Today at 2:00 pm" or "Tomorrow at 9:00 am" |
+| `units` | "3 days 12 hours 45 minutes" |
+| `badge` | "3d 12h 45m" |
+
+See [Countdown & Relative Time](../features/countdown) for details.
+
+---
+
 ## Filter Shortcodes
 
 For themes not using Bricks or Elementor:
@@ -282,6 +358,20 @@ Search filter.
 [lre_filter_search]
 [lre_filter_search placeholder="Search events..."]
 ```
+
+### [lre_active_filters]
+
+Displays removable pills for currently active filters.
+
+```
+[lre_active_filters]
+[lre_active_filters layout="inline"]
+[lre_active_filters layout="stacked"]
+```
+
+| Attribute | Description | Default |
+|-----------|-------------|---------|
+| `layout` | Pill layout: inline or stacked | inline |
 
 ### [lre_filter_reset]
 

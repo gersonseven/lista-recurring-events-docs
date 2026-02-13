@@ -157,6 +157,42 @@ Enable the "Add to Calendar" button feature within the 'Action Buttons' accordio
 
 ![Add To Calendar](/img/add-to-calendar.jpg)
 
+## Schema Tab
+
+Configure Schema.org structured data output for Google rich search results. See [Schema.org Structured Data](../features/schema) for full details.
+
+| Setting | Description |
+|---------|-------------|
+| **Enable Schema Output** | Master toggle for JSON-LD markup |
+| **Organizer Name** | Default organizer for all events |
+| **Organizer URL** | Organizer website |
+| **Location Name** | Default venue name |
+| **Address Fields** | Street, City, State, Postal Code, Country |
+| **Attendance Mode** | Online, Offline, or Mixed |
+
+## Advanced Tab
+
+Manage plugin modes and data. See [Stored Occurrences](../features/stored-occurrences) and [Native Events Mode](../features/native-mode) for details.
+
+| Setting | Description |
+|---------|-------------|
+| **Mode Switcher** | Switch between Native and Integration modes |
+| **Reset Plugin Data** | Complete fresh start (requires confirmation) |
+| **Data Information** | Table name, post types, occurrence count, version |
+
+:::warning
+Reset Plugin Data is destructive and cannot be undone. It removes all recurrence settings, stored occurrences, and plugin options.
+:::
+
+## Debug Tab
+
+Enable debug logging for troubleshooting. When enabled, the plugin logs detailed execution information that can help diagnose issues.
+
+1. Toggle **Enable Debug Logging** to On
+2. Reproduce the issue
+3. Check the debug output
+4. Toggle Off when done
+
 ## Saving Settings
 
 Click **Save Changes** at the bottom of each tab after making changes. Some changes (like post type selection) may require clearing the cache to take effect.
