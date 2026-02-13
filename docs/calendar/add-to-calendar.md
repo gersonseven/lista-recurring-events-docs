@@ -95,6 +95,19 @@ When a user clicks the Add to Calendar button:
 3. For web calendars (Google, Yahoo, etc.), a new tab opens with pre-filled event details
 4. For Apple Calendar, an ICS file downloads
 
+### Single Occurrence vs Entire Series
+
+The dropdown offers two download modes for recurring events:
+
+- **Single occurrence** — Adds just the selected date to the user's calendar
+- **Entire Series** — Downloads a single ICS file containing the full recurring series using the iCalendar `RRULE` standard. The user's calendar app (Apple Calendar, Outlook, Google Calendar via import) interprets the rule and creates all occurrences natively.
+
+The "Entire Series" option is available for events using standard recurrence patterns (Daily, Weekly, Monthly, Yearly). It respects the event's end type — events ending "After X occurrences" or "On date" include those limits in the RRULE.
+
+:::tip
+"Entire Series" works with all end types. If you previously saw it greyed out for events using "After X occurrences", this was fixed in version 1.5.0.
+:::
+
 ### Event Data
 
 The button sends this information to the calendar:
