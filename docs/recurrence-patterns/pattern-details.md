@@ -71,7 +71,7 @@ Event occurs on a specific weekday occurrence within each month.
 
 | Option | Description | Options |
 |--------|-------------|---------|
-| **Ordinal** | Which occurrence | First, Second, Third, Fourth, Last |
+| **Ordinal** | Which occurrence(s) | First, Second, Third, Fourth, Fifth, Last |
 | **Weekday** | Day of week | Sunday - Saturday |
 | **Interval** | Months between occurrences | 1, 2, 3, etc. |
 
@@ -90,11 +90,21 @@ The "Last" ordinal is intelligent:
 
 This is perfect for scheduling that truly needs the last occurrence of a weekday, regardless of month length.
 
+### The "Fifth" Option
+
+The "5th" ordinal targets the fifth occurrence of a weekday within a month. Since not every month has a 5th occurrence, months with only four are automatically skipped. This is useful for events that should only run in longer months.
+
+### Multiple Ordinal Selection
+
+You can select more than one ordinal at a time — for example, "1st and 3rd Tuesday" — without creating separate events. All selected ordinals generate occurrences within the same recurrence pattern.
+
 ### Pattern Description
 
 - "First Monday of every month"
 - "Second Tuesday every 2 months"
 - "Last Friday of every month"
+- "Fifth Sunday of every month"
+- "First and Third Tuesday of every month"
 
 ---
 

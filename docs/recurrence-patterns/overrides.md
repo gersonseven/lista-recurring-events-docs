@@ -26,6 +26,10 @@ Before using overrides, configure which fields can be overridden:
 
 ![Override Fields Settings](/img/overrides-tab.jpg)
 
+:::info
+Start date, end date, start time, and end time fields are not listed in the Overrides settings — they are managed by dedicated controls in the override row (Reschedule for dates, time pickers for times).
+:::
+
 ### Available Field Types
 
 The plugin detects fields from your configured field source (ACF, JetEngine, etc.):
@@ -61,8 +65,15 @@ The plugin detects fields from your configured field source (ACF, JetEngine, etc
 
 Each override row includes:
 - **Date selector**: Choose which occurrence to override
+- **Start Time / End Time inputs**: Change the time for this occurrence (appears automatically when a time field is configured)
 - **Field inputs**: One for each allowed override field
 - **Remove button**: Delete this override
+
+### Per-Occurrence Time Overrides
+
+Override rows include dedicated Start Time and End Time inputs, allowing you to change the time of a specific occurrence without affecting the rest of the series. The time inputs appear automatically when a time field is configured in the plugin settings.
+
+For fields that store both date and time together (such as Meta Box `datetime` or ACF `Date Time Picker`), the override UI renders both a date picker and a time picker instead of a date-only picker.
 
 ## Reschedule Feature
 

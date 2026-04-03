@@ -474,3 +474,236 @@ add_filter('lre_resolved_event_label', function($label, $post_id, $date) {
     return $label;
 }, 10, 3);
 ```
+
+---
+
+## Addon Query & Output Filters
+
+These filters give addons fine-grained control over every event query path — Bricks query loops, stored occurrences, AJAX filtering, shortcodes, and the public PHP API.
+
+### lre_excluded_post_ids
+
+Exclude posts from all event query paths with a single hook. Results are cached per request for zero performance impact.
+
+```php
+add_filter('lre_excluded_post_ids', function($excluded_ids) {
+    // Exclude members-only events for non-members
+    if (!current_user_can('access_member_content')) {
+        $member_events = get_member_only_event_ids();
+        $excluded_ids = array_merge($excluded_ids, $member_events);
+    }
+    return $excluded_ids;
+});
+```
+
+---
+
+### lre_post_access_flags
+
+Attach access metadata to individual posts. Addons use this to provide a standardised data shape for frontend templates to render access indicators like lock icons or membership badges.
+
+```php
+add_filter('lre_post_access_flags', function($flags, $post_id) {
+    $flags['members_only'] = (bool) get_post_meta($post_id, '_members_only', true);
+    $flags['required_tier'] = get_post_meta($post_id, '_required_tier', true);
+    return $flags;
+}, 10, 2);
+```
+
+**Parameters:**
+- `$flags` (array) — Key-value access flags
+- `$post_id` (int) — Event post ID
+
+---
+
+### lre_bricks_query_args
+
+Modify WP_Query arguments for Bricks query loops before the query executes.
+
+```php
+add_filter('lre_bricks_query_args', function($args) {
+    // Only show events with a specific meta value
+    $args['meta_query'][] = [
+        'key'   => '_featured',
+        'value' => '1',
+    ];
+    return $args;
+});
+```
+
+---
+
+### lre_bricks_occurrence_results
+
+Modify occurrence results from Bricks query loops before pagination is applied.
+
+```php
+add_filter('lre_bricks_occurrence_results', function($results) {
+    // Remove events that require login
+    return array_filter($results, function($item) {
+        return !get_post_meta($item->post_id, '_login_required', true) || is_user_logged_in();
+    });
+});
+```
+
+---
+
+### lre_occurrence_store_query_args
+
+Modify the arguments passed to the OccurrenceStore query.
+
+```php
+add_filter('lre_occurrence_store_query_args', function($args) {
+    $args['post_type'] = 'workshop';
+    return $args;
+});
+```
+
+---
+
+### lre_occurrence_store_query_where
+
+Modify the WHERE clause for stored occurrence database queries.
+
+```php
+add_filter('lre_occurrence_store_query_where', function($where, $args) {
+    // Add custom SQL condition
+    $where .= " AND post_id NOT IN (SELECT post_id FROM wp_postmeta WHERE meta_key = '_hidden' AND meta_value = '1')";
+    return $where;
+}, 10, 2);
+```
+
+---
+
+### lre_occurrence_store_query_results
+
+Modify the results returned from stored occurrence database queries.
+
+```php
+add_filter('lre_occurrence_store_query_results', function($results, $args) {
+    // Annotate results with extra data
+    foreach ($results as &$result) {
+        $result->venue = get_post_meta($result->post_id, 'venue_name', true);
+    }
+    return $results;
+}, 10, 2);
+```
+
+---
+
+### lre_filter_query_args
+
+Modify the query when users apply frontend AJAX filters.
+
+```php
+add_filter('lre_filter_query_args', function($args) {
+    // Force a taxonomy condition on filtered results
+    $args['tax_query'][] = [
+        'taxonomy' => 'event_visibility',
+        'field'    => 'slug',
+        'terms'    => 'public',
+    ];
+    return $args;
+});
+```
+
+---
+
+### lre_get_events_args
+
+Modify the arguments passed to the public `lre_get_events()` function.
+
+```php
+add_filter('lre_get_events_args', function($args) {
+    $args['posts_per_page'] = 50;
+    return $args;
+});
+```
+
+---
+
+### lre_get_events_results
+
+Modify the results returned by the public `lre_get_events()` function.
+
+```php
+add_filter('lre_get_events_results', function($results, $args) {
+    // Add computed data to each result
+    foreach ($results as &$event) {
+        $event['spots_remaining'] = calculate_spots($event['post_id'], $event['date']);
+    }
+    return $results;
+}, 10, 2);
+```
+
+---
+
+### lre_shortcode_output
+
+Modify or wrap the output of any LRE shortcode.
+
+```php
+add_filter('lre_shortcode_output', function($output, $tag, $atts) {
+    if ($tag === 'lre_next_date') {
+        $output = '<span class="my-date-wrapper">' . $output . '</span>';
+    }
+    return $output;
+}, 10, 3);
+```
+
+**Parameters:**
+- `$output` (string) — The shortcode HTML output
+- `$tag` (string) — The shortcode name (e.g., `lre_next_date`)
+- `$atts` (array) — The shortcode attributes
+
+---
+
+## Waitlist Filters
+
+### lre_ticketing_active
+
+Lets ticketing addons signal their presence so core features like waitlist settings only appear when relevant.
+
+```php
+add_filter('lre_ticketing_active', '__return_true');
+```
+
+---
+
+### lre_ticketing_waitlist_enabled
+
+Read the event-level waitlist enabled status.
+
+```php
+add_filter('lre_ticketing_waitlist_enabled', function($enabled, $post_id) {
+    return $enabled;
+}, 10, 2);
+```
+
+---
+
+### lre_ticketing_waitlist_max
+
+Read the event-level maximum waitlist size.
+
+```php
+add_filter('lre_ticketing_waitlist_max', function($max, $post_id) {
+    return $max;
+}, 10, 2);
+```
+
+---
+
+## AccessControl Utility
+
+The `AccessControl` utility class provides a centralised way to merge excluded post IDs into both `WP_Query` and `OccurrenceStore` query arguments. Use it in your addon instead of duplicating the merge logic across multiple hooks.
+
+```php
+use ListaRecurringEvents\Utilities\AccessControl;
+
+// Merge exclusions into WP_Query args
+$args = AccessControl::merge_exclusions_wp_query($args, $excluded_ids);
+
+// Merge exclusions into OccurrenceStore args
+$args = AccessControl::merge_exclusions_occurrence_store($args, $excluded_ids);
+```

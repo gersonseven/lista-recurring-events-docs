@@ -45,9 +45,14 @@ Customize the calendar with attributes:
 | `primary_color` | Override primary color | — | Any hex color |
 | `event_bg` | Event background color | — | Any hex color |
 | `event_text` | Event text color | — | Any hex color |
-| `event_display` | Click behavior | offcanvas | offcanvas, link, none |
+| `event_display` | Click behavior | offcanvas | offcanvas, link, popup, none |
+| `popup_id` | Bricks popup template ID (when event_display="popup") | — | Template ID |
 | `height` | Calendar height | auto | auto, 600px, 80vh, etc. |
 | `post_type` | Filter by post type | all | event, workshop, etc. |
+| `taxonomy` | Filter by taxonomy | — | event_category, etc. |
+| `terms` | Terms to filter by (requires taxonomy) | — | Comma-separated slugs or IDs |
+| `taxonomies` | Multiple taxonomy filter | — | Pipe-separated groups |
+| `id` | Custom calendar ID for targeting | — | Any string |
 | `view` | Initial view | dayGridMonth | dayGridMonth |
 | `class` | CSS class | — | Any class name |
 
@@ -110,6 +115,16 @@ Navigates directly to the event page.
 ```
 [lre_calendar event_display="link"]
 ```
+
+### Bricks Popup
+
+Opens a Bricks Builder popup template with the clicked event's post as context, so dynamic data tags in the popup resolve against that specific event.
+
+```
+[lre_calendar event_display="popup" popup_id="1234"]
+```
+
+Create a Bricks popup template for your event detail layout, then reference its template ID. The plugin automatically injects the popup template into Bricks' active templates.
 
 ### Disabled
 
@@ -196,3 +211,42 @@ Set custom colors on individual events. Colors can be configured in Settings →
 ![Event Color](/img/event-colors.jpg)
 
 You can change the color headings from here as well.
+
+## Calendar UX Features
+
+### Today Button
+
+The calendar header includes a "Today" button for quick return to the current month. On the mini calendar (Event Occurrences element), a dot button appears between the navigation arrows when viewing a different month.
+
+### Single-Event Day Shortcut (Mobile)
+
+On mobile devices, tapping a day with exactly one event goes directly to the event page instead of showing a list with a single item.
+
+### Location in List View
+
+When "Display location" is enabled, the venue name or virtual event label appears beneath the event title in all list views.
+
+### Virtual Event Labels
+
+Virtual events display a friendly label such as "Join us online via Zoom" (or whichever platform is configured) in the calendar grid, list view, and offcanvas panel, instead of the raw calendar label.
+
+### Taxonomy Filtering
+
+Filter which events appear on a calendar by taxonomy:
+
+```
+[lre_calendar taxonomy="event_category" terms="yoga,pilates"]
+```
+
+Filter by multiple taxonomies using pipe-separated groups:
+
+```
+[lre_calendar taxonomies="event_category:yoga|event_tag:beginner"]
+```
+
+Use the `id` attribute to assign a custom identifier when placing multiple calendars on the same page:
+
+```
+[lre_calendar id="yoga-cal" taxonomy="event_category" terms="yoga"]
+[lre_calendar id="fitness-cal" taxonomy="event_category" terms="fitness"]
+```

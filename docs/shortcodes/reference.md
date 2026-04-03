@@ -231,6 +231,29 @@ Displays an interactive calendar. See [Calendar Configuration](../calendar/confi
 
 ---
 
+## Events List Shortcode
+
+### [lre_events]
+
+Displays a list of upcoming events. Supports taxonomy filtering using any registered event taxonomy name as an attribute.
+
+```
+[lre_events]
+[lre_events limit="10"]
+[lre_events event_category="workshops,fitness"]
+[lre_events event_tag="beginner" limit="5"]
+```
+
+| Attribute | Description | Default |
+|-----------|-------------|---------|
+| `id` | Post ID | Current post |
+| `limit` | Max events to show | Plugin setting |
+| `{taxonomy_name}` | Filter by any registered taxonomy | — |
+
+**Output:** A formatted list of upcoming events with dates and links.
+
+---
+
 ## Add to Calendar Shortcode
 
 ### [lre_add_to_calendar]
@@ -287,6 +310,25 @@ Displays the event's custom display label.
 | `id` | Post ID | Current post |
 
 **Output:** "Sold Out", "Almost Full", etc. — whatever you've entered for the event or occurrence.
+
+---
+
+### [lre_event_color]
+
+Displays the hex colour assigned to the event (per-event override or inherited from the event's category).
+
+```
+[lre_event_color]
+[lre_event_color id="123"]
+```
+
+| Attribute | Description | Default |
+|-----------|-------------|---------|
+| `id` | Post ID | Current post |
+
+**Output:** "#e74c3c"
+
+Also available as a Bricks dynamic tag (`{lre_event_color}`) and Elementor dynamic tag.
 
 ---
 

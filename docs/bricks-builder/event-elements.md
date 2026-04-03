@@ -6,6 +6,53 @@ sidebar_position: 4
 
 Specialized Bricks elements for displaying event information.
 
+## Calendar Element
+
+Display an interactive calendar as a native Bricks element with full visual controls and editor preview.
+
+### Adding the Element
+
+1. In the Bricks elements panel, search for **LRE Calendar** (under the LRE Elements category)
+2. Drag it onto your page
+3. Configure using the visual panel controls
+
+### Panel Controls
+
+All `[lre_calendar]` shortcode options are available as visual controls, organised into six groups:
+
+| Group | Controls |
+|-------|----------|
+| **Data Source** | Post type, taxonomy filter, terms |
+| **Calendar View** | Initial view, height, week start day |
+| **Appearance** | Theme preset, primary color, event colors |
+| **Behaviour** | Event click action (offcanvas, link, popup, none), open in new tab |
+| **Header Filter** | Native filter taxonomy, display mode (pills, buttons, dropdown) |
+| **Advanced** | Custom CSS class, calendar ID |
+
+### Bricks Popup Support
+
+Set the event click action to **Bricks Popup** to open a Bricks popup template when an event is clicked. The popup receives the clicked event's post as context, so dynamic data tags in the popup resolve against that specific event.
+
+1. Create a Bricks popup template for your event detail layout
+2. In the Calendar element settings, set event display to **Bricks Popup**
+3. Select your popup template from the dropdown
+
+The plugin automatically injects the popup template into Bricks' active templates.
+
+:::tip
+Popup support also works with the `[lre_calendar]` shortcode: `[lre_calendar event_display="popup" popup_id="1234"]`
+:::
+
+### Editor Preview
+
+The Bricks editor renders a complete server-side calendar preview with real event data. You can configure and style the calendar without switching to the frontend.
+
+### AJAX Lifecycle Support
+
+Calendars inside Bricks popups, AJAX-paginated containers, or dynamically loaded query results initialise correctly — no extra configuration needed.
+
+---
+
 ## Event Occurrences Element
 
 Display upcoming dates for a single event—perfect for event detail pages.
@@ -64,7 +111,7 @@ Shows a compact monthly calendar highlighting occurrence dates.
 
 | Setting | Description |
 |---------|-------------|
-| **Number of Occurrences** | How many dates to show (max 375) |
+| **Number of Occurrences** | How many dates to show (max 375, or 0 for all) |
 | **Exclude Current** | Hide the currently viewed occurrence |
 | **Empty Message** | Text when no upcoming dates |
 | **Date Format** | PHP date format string |

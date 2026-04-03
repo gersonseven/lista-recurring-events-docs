@@ -54,12 +54,15 @@ In any Bricks text element or dynamic field:
 ### Status & Label Tags
 
 | Tag | Output | Example |
-|-----|--------|---------  |
+|-----|--------|---------|  |
 | `{lre_event_status}` | Human-readable status | "Cancelled" |
 | `{lre_event_status_label}` | Status formatted for display | "Cancelled" |
 | `{lre_event_label}` | Custom display label | "Sold Out" |
+| `{lre_event_color}` | Category colour hex code | "#e74c3c" |
 
 These tags can also be used in **Bricks conditions** to conditionally show or hide elements. For example, show a red badge only when `{lre_event_status}` equals `cancelled`.
+
+The `{lre_event_color}` tag outputs the hex colour assigned to the event (either a per-event override or inherited from the event's category). Use it in dynamic CSS to style elements based on the event's colour — for example, setting a border or background colour dynamically.
 
 ### Countdown Tag
 

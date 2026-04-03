@@ -132,6 +132,14 @@ Add the **LRE Pagination** element to paginate results:
 
 See [Pagination Element](./event-elements#pagination-element) for detailed configuration.
 
+### Infinite Scroll & Load More
+
+LRE query loops also work with Bricks Builder's built-in **infinite scroll** toggle and **load more** button interactions. Enable these from Bricks' query loop settings — no extra configuration on the LRE side is required.
+
+## Taxonomy Filter Dynamic Tags
+
+The **Terms** field in the Bricks query loop taxonomy filter accepts Bricks dynamic tags such as `{post_terms_lre_event_type}`. Dynamic tag output is automatically resolved to term slugs, so both term names and slugs work correctly. This is useful for building archive templates where the displayed events should match the current term context.
+
 ## Performance Tips
 
 1. **Stored Occurrences** — The plugin uses pre-calculated occurrences stored in the database, making query loops significantly faster than on-demand calculation
