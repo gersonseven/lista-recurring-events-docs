@@ -1,5 +1,7 @@
 ---
 sidebar_position: 1
+title: Query Loop Integration
+description: Display recurring events in Bricks Builder using the custom query loop type.
 ---
 
 # Query Loop Integration
@@ -44,7 +46,7 @@ Once Recurring Events is selected, you'll see custom options:
 #### Basic Options
 
 | Option | Description | Default |
-|--------|-------------|---------|
+| --- | --- | --- |
 | **Post Type** | Which post type(s) to query | All configured |
 | **Event Scope** | Upcoming events only, All events, or Past events only | Upcoming |
 | **Order By** | Sort criterion | Next Occurrence |
@@ -52,11 +54,12 @@ Once Recurring Events is selected, you'll see custom options:
 | **Include Non-Recurring** | Include one-time events | On |
 | **Occurrences Per Event** | How many dates per event | 1 |
 | **Posts Per Page** | Results per page | 10 |
+| **Hide In-Progress Events** | Override the global Query Behaviour setting for this loop: Use Global, Hide once started, or Show until ended | Use Global |
 
 #### Advanced Options
 
 | Option | Description |
-|--------|-------------|
+| --- | --- |
 | **Offset** | Skip first X results |
 | **Include IDs** | Only show specific event IDs |
 | **Exclude IDs** | Hide specific event IDs |
@@ -110,6 +113,16 @@ Alphabetical sorting by event title.
 
 Sort by when the event post was created.
 
+## Hide In-Progress Events
+
+The **Hide In-Progress Events** dropdown lets each Bricks query loop decide what happens to a same-day event that has already started but not yet ended:
+
+- **Use Global** — follow the **Settings → Query Behaviour → Treat in-progress events as past** option
+- **Hide once started** — treat the event as past as soon as its start time has passed today
+- **Show until ended** — keep the event in upcoming results while it's running
+
+Today's events that have already finished are always removed from upcoming queries regardless of this setting. See [Query Behaviour](/features/query-behaviour) for more.
+
 ## Filtering Integration
 
 Query loops work with the filter elements:
@@ -120,7 +133,7 @@ Query loops work with the filter elements:
 - Search Filter
 - Event Type Filter
 
-See [Filter Elements](./filter-elements) for setup instructions.
+See [Filter Elements](/bricks-builder/filter-elements) for setup instructions.
 
 ## Pagination
 
@@ -130,7 +143,7 @@ Add the **LRE Pagination** element to paginate results:
 2. Target your query loop container
 3. Style the pagination controls
 
-See [Pagination Element](./event-elements#pagination-element) for detailed configuration.
+See [Pagination Element](/bricks-builder/event-elements#pagination-element) for detailed configuration.
 
 ### Infinite Scroll & Load More
 

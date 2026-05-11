@@ -1,5 +1,7 @@
 ---
 sidebar_position: 1
+title: Shortcode Reference
+description: Complete reference for all available shortcodes.
 ---
 
 # Shortcode Reference
@@ -19,7 +21,7 @@ Displays the full formatted date of the next occurrence.
 ```
 
 | Attribute | Description | Default |
-|-----------|-------------|---------|
+| --- | --- | --- |
 | `id` | Post ID | Current post |
 | `format` | PHP date format | Plugin setting |
 
@@ -37,7 +39,7 @@ Displays just the day number.
 ```
 
 | Attribute | Description | Default |
-|-----------|-------------|---------|
+| --- | --- | --- |
 | `id` | Post ID | Current post |
 | `leading_zero` | Include leading zero | false |
 
@@ -56,7 +58,7 @@ Displays the month name.
 ```
 
 | Attribute | Description | Default |
-|-----------|-------------|---------|
+| --- | --- | --- |
 | `id` | Post ID | Current post |
 | `format` | full, short, or number | full |
 
@@ -74,7 +76,7 @@ Displays the year.
 ```
 
 | Attribute | Description | Default |
-|-----------|-------------|---------|
+| --- | --- | --- |
 | `id` | Post ID | Current post |
 | `short` | Two-digit year | false |
 
@@ -92,7 +94,7 @@ Displays the weekday name.
 ```
 
 | Attribute | Description | Default |
-|-----------|-------------|---------|
+| --- | --- | --- |
 | `id` | Post ID | Current post |
 | `format` | full or short | full |
 
@@ -110,7 +112,7 @@ Displays the event time.
 ```
 
 | Attribute | Description | Default |
-|-----------|-------------|---------|
+| --- | --- | --- |
 | `id` | Post ID | Current post |
 | `format` | PHP time format | g:i a |
 
@@ -130,7 +132,7 @@ Displays a human-readable recurrence pattern description.
 ```
 
 | Attribute | Description | Default |
-|-----------|-------------|---------|
+| --- | --- | --- |
 | `id` | Post ID | Current post |
 
 **Output:** "Every Tuesday", "First Monday of every month", etc.
@@ -161,7 +163,7 @@ Displays a list of upcoming occurrences.
 ```
 
 | Attribute | Description | Default |
-|-----------|-------------|---------|
+| --- | --- | --- |
 | `id` | Post ID | Current post |
 | `limit` | Max occurrences | Plugin setting |
 | `format` | Date format | j F, Y |
@@ -176,7 +178,8 @@ Displays a list of upcoming occurrences.
 **Basic Output:** "January 15, January 22, January 29"
 
 **List Output:**
-```html
+
+```
 <li>January 15</li>
 <li>January 22</li>
 <li>January 29</li>
@@ -197,7 +200,7 @@ Displays a field value with override support.
 ```
 
 | Attribute | Description | Default |
-|-----------|-------------|---------|
+| --- | --- | --- |
 | `id` | Post ID | Current post |
 | `name` | Field name | (required) |
 | `size` | Image size (for images) | full |
@@ -222,11 +225,12 @@ Only outputs if the current occurrence has been rescheduled and has a note.
 
 ### [lre_calendar]
 
-Displays an interactive calendar. See [Calendar Configuration](../calendar/configuration) for full details.
+Displays an interactive calendar. See [Calendar Configuration](/calendar/configuration) for full details.
 
 ```
 [lre_calendar]
 [lre_calendar theme="dark" height="600px"]
+[lre_calendar view="listWeek" tablet_view="dayGridMonth" mobile_view="listMonth"]
 ```
 
 ---
@@ -235,20 +239,37 @@ Displays an interactive calendar. See [Calendar Configuration](../calendar/confi
 
 ### [lre_events]
 
-Displays a list of upcoming events. Supports taxonomy filtering using any registered event taxonomy name as an attribute.
+Displays a paginated list of upcoming events with full filtering support. Honours the global Query Behaviour settings, and accepts any registered event taxonomy as an attribute.
 
 ```
 [lre_events]
-[lre_events limit="10"]
+[lre_events per_page="10"]
 [lre_events event_category="workshops,fitness"]
-[lre_events event_tag="beginner" limit="5"]
+[lre_events event_tag="beginner" per_page="5"]
+[lre_events hide_in_progress="hide"]
 ```
 
 | Attribute | Description | Default |
-|-----------|-------------|---------|
-| `id` | Post ID | Current post |
-| `limit` | Max events to show | Plugin setting |
-| `{taxonomy_name}` | Filter by any registered taxonomy | — |
+| --- | --- | --- |
+| `per_page` | Items per page | 10 |
+| `occurrences_per_event` | Max occurrences per recurring event | 10 |
+| `hide_past` | Hide past occurrences | true |
+| `hide_in_progress` | How to handle today's in-progress events: `default`, `hide`, or `show` | default |
+| `include_non_recurring` | Include one-time events | true |
+| `sort_by` | `date`, `title`, or `publish_date` | date |
+| `sort_order` | `ASC` or `DESC` | ASC |
+| `template` | `default`, `minimal`, or custom template name | default |
+| `class` | Wrapper CSS class | — |
+| `no_results_text` | Message shown when no events match | "No events found." |
+| `{taxonomy_name}` | Filter by any registered event taxonomy (term slugs or IDs, comma-separated) | — |
+
+**`hide_in_progress` values:**
+
+- `default` — use the global **Settings → Query Behaviour → Treat in-progress events as past** setting
+- `hide` — treat an event as past as soon as its start time has passed today
+- `show` — keep showing the event while it's running; hide it only after its end time has passed
+
+Events that have already ended today are always removed from upcoming queries regardless of this setting.
 
 **Output:** A formatted list of upcoming events with dates and links.
 
@@ -258,7 +279,7 @@ Displays a list of upcoming events. Supports taxonomy filtering using any regist
 
 ### [lre_add_to_calendar]
 
-Displays the Add to Calendar button. See [Add to Calendar](../calendar/add-to-calendar) for full details.
+Displays the Add to Calendar button. See [Add to Calendar](/calendar/add-to-calendar) for full details.
 
 ```
 [lre_add_to_calendar]
@@ -280,19 +301,19 @@ Displays the event's current status.
 ```
 
 | Attribute | Description | Default |
-|-----------|-------------|---------|
+| --- | --- | --- |
 | `id` | Post ID | Current post |
 | `format` | Output format: label, key, or schema | label |
 
 **Output by format:**
 
 | Format | Example Output |
-|--------|----------------|
+| --- | --- |
 | `label` (default) | "Cancelled" |
 | `key` | "cancelled" |
 | `schema` | "EventCancelled" |
 
-See [Event Status & Labels](../features/event-status) for details.
+See [Event Status & Labels](/features/event-status) for details.
 
 ---
 
@@ -306,7 +327,7 @@ Displays the event's custom display label.
 ```
 
 | Attribute | Description | Default |
-|-----------|-------------|---------|
+| --- | --- | --- |
 | `id` | Post ID | Current post |
 
 **Output:** "Sold Out", "Almost Full", etc. — whatever you've entered for the event or occurrence.
@@ -323,7 +344,7 @@ Displays the hex colour assigned to the event (per-event override or inherited f
 ```
 
 | Attribute | Description | Default |
-|-----------|-------------|---------|
+| --- | --- | --- |
 | `id` | Post ID | Current post |
 
 **Output:** "#e74c3c"
@@ -346,19 +367,19 @@ Displays a countdown or relative time label for an event.
 ```
 
 | Attribute | Description | Default |
-|-----------|-------------|---------|
+| --- | --- | --- |
 | `id` | Post ID | Current post |
 | `mode` | Display mode: smart, units, badge | smart |
 
 **Output by mode:**
 
 | Mode | Example Output |
-|------|----------------|
+| --- | --- |
 | `smart` | "Today at 2:00 pm" or "Tomorrow at 9:00 am" |
 | `units` | "3 days 12 hours 45 minutes" |
 | `badge` | "3d 12h 45m" |
 
-See [Countdown & Relative Time](../features/countdown) for details.
+See [Countdown & Relative Time](/features/countdown) for details.
 
 ---
 
@@ -412,7 +433,7 @@ Displays removable pills for currently active filters.
 ```
 
 | Attribute | Description | Default |
-|-----------|-------------|---------|
+| --- | --- | --- |
 | `layout` | Pill layout: inline or stacked | inline |
 
 ### [lre_filter_reset]
@@ -430,7 +451,7 @@ Reset all filters button.
 
 ### PHP Templates
 
-```php
+```
 <?php echo do_shortcode('[lre_next_date]'); ?>
 ```
 

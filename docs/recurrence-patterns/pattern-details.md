@@ -1,5 +1,7 @@
 ---
 sidebar_position: 2
+title: Pattern Details
+description: Detailed configuration options for each recurrence pattern.
 ---
 
 # Pattern Details
@@ -13,7 +15,7 @@ The simplest pattern—event repeats every X days.
 ### Configuration
 
 | Option | Description | Default |
-|--------|-------------|---------|
+| --- | --- | --- |
 | **Interval** | Days between occurrences | 1 |
 
 ### Examples
@@ -38,7 +40,7 @@ Event repeats on specific days of the week.
 ### Configuration
 
 | Option | Description | Default |
-|--------|-------------|---------|
+| --- | --- | --- |
 | **Days** | Which days of the week | None (required) |
 | **Interval** | Weeks between occurrences | 1 |
 
@@ -55,6 +57,24 @@ Check one or more days. The event will occur on ALL selected days during each ap
 - **Weekends**: Days = Sat, Sun, Interval = 1
 - **Every other Tuesday**: Days = Tue, Interval = 2
 
+### Per-Weekday Time Schedules
+
+Events that repeat on multiple days of the week can have different start and end times for each day — without needing per-occurrence overrides.
+
+For example, a class running Tuesday, Thursday, and Saturday can run at 5:30 PM on the weekdays and 10:00 AM on Saturday using a single recurring event.
+
+**How to enable:**
+
+1. Configure your Weekly pattern and check the days the event runs on.
+2. Toggle on **Different times per day** beneath the weekday checkboxes.
+3. A time-picker row appears for each selected weekday. Enter the start and end time for that day.
+
+The schedule applies automatically to every generated occurrence. Per-occurrence time overrides (set in the Overrides panel) still take priority when present.
+
+:::tip
+This works equally well with the **Monthly (Nth Weekday)** pattern when you've selected multiple weekdays — see below.
+:::
+
 ### Pattern Description
 
 - "Every week on Monday"
@@ -70,7 +90,7 @@ Event occurs on a specific weekday occurrence within each month.
 ### Configuration
 
 | Option | Description | Options |
-|--------|-------------|---------|
+| --- | --- | --- |
 | **Ordinal** | Which occurrence(s) | First, Second, Third, Fourth, Fifth, Last |
 | **Weekday** | Day of week | Sunday - Saturday |
 | **Interval** | Months between occurrences | 1, 2, 3, etc. |
@@ -98,6 +118,10 @@ The "5th" ordinal targets the fifth occurrence of a weekday within a month. Sinc
 
 You can select more than one ordinal at a time — for example, "1st and 3rd Tuesday" — without creating separate events. All selected ordinals generate occurrences within the same recurrence pattern.
 
+### Per-Weekday Time Schedules
+
+When the Monthly (Nth Weekday) pattern targets multiple weekdays, each weekday can have its own start and end time. Enable **Different times per day** beneath the weekday selectors and enter times for each — see the [Weekly Pattern section](#per-weekday-time-schedules) for full details.
+
 ### Pattern Description
 
 - "First Monday of every month"
@@ -115,7 +139,7 @@ Event repeats on the same calendar date each month.
 ### Configuration
 
 | Option | Description | Default |
-|--------|-------------|---------|
+| --- | --- | --- |
 | **Interval** | Months between occurrences | 1 |
 
 The date comes from your anchor date. If your event's anchor date is January 15, the event repeats on the 15th of applicable months.
@@ -196,10 +220,11 @@ Manually select specific dates from a calendar picker.
 ## Choosing the Right Pattern
 
 | Scenario | Recommended Pattern |
-|----------|---------------------|
+| --- | --- |
 | Daily standup meeting | Daily (interval 1) |
 | Weekly team sync | Weekly (single day) |
 | MWF exercise class | Weekly (multiple days) |
+| Class with different times per day | Weekly + per-weekday time schedules |
 | Monthly board meeting (first Tuesday) | Monthly Nth Weekday |
 | Rent due on the 1st | Monthly Same Date |
 | Annual conference | Yearly |

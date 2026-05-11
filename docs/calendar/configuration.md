@@ -1,5 +1,7 @@
 ---
 sidebar_position: 1
+title: Calendar Configuration
+description: Display events in a beautiful, interactive calendar using the [lre_calendar] shortcode.
 ---
 
 # Calendar Configuration
@@ -10,9 +12,11 @@ Display events in a beautiful, interactive calendar using the `[lre_calendar]` s
 
 The calendar integration uses FullCalendar to provide:
 
-- Monthly grid view
+- Five calendar views — month grid, list (week), list (month), time grid (week), and multi-month (year)
+- Responsive view switching (different views per breakpoint)
+- Optional view switcher dropdown in the navigation pill
 - Click-to-view event details
-- Smooth month navigation
+- Smooth navigation between periods
 - Mobile-responsive design
 - Multi-day event support
 - Custom theming
@@ -40,21 +44,92 @@ Customize the calendar with attributes:
 ### Available Attributes
 
 | Attribute | Description | Default | Options |
-|-----------|-------------|---------|---------|
+| --- | --- | --- | --- |
 | `theme` | Color theme | default | default, minimal, dark |
 | `primary_color` | Override primary color | — | Any hex color |
 | `event_bg` | Event background color | — | Any hex color |
 | `event_text` | Event text color | — | Any hex color |
 | `event_display` | Click behavior | offcanvas | offcanvas, link, popup, none |
-| `popup_id` | Bricks popup template ID (when event_display="popup") | — | Template ID |
+| `popup_id` | Bricks popup template ID (when `event_display="popup"`) | — | Template ID |
 | `height` | Calendar height | auto | auto, 600px, 80vh, etc. |
 | `post_type` | Filter by post type | all | event, workshop, etc. |
 | `taxonomy` | Filter by taxonomy | — | event_category, etc. |
 | `terms` | Terms to filter by (requires taxonomy) | — | Comma-separated slugs or IDs |
 | `taxonomies` | Multiple taxonomy filter | — | Pipe-separated groups |
 | `id` | Custom calendar ID for targeting | — | Any string |
-| `view` | Initial view | dayGridMonth | dayGridMonth |
+| `view` | Initial desktop view | dayGridMonth | See [Calendar Views](#calendar-views) |
+| `tablet_view` | View on tablet breakpoint | — | Any view, or empty to match desktop |
+| `mobile_view` | View on mobile breakpoint | — | Any view, or empty to match desktop |
+| `view_switcher` | Comma-separated views to expose in the dropdown switcher | — | e.g. `dayGridMonth,listWeek,multiMonthYear` |
 | `class` | CSS class | — | Any class name |
+
+## Calendar Views
+
+Five views are available, each with its own strengths:
+
+| View ID | Label | Best For |
+| --- | --- | --- |
+| `dayGridMonth` | Month Grid | Default overview, family calendars, weekend events |
+| `listWeek` | List (Week) | Day-grouped agenda for the current week |
+| `listMonth` | List (Month) | Day-grouped agenda spanning a full month |
+| `timeGridWeek` | Time Grid (Week) | Schedules with overlapping or hourly-slotted events |
+| `multiMonthYear` | Multi-Month (Year) | Year-at-a-glance with twelve mini month grids and dot indicators |
+
+```
+[lre_calendar view="listWeek"]
+[lre_calendar view="timeGridWeek"]
+[lre_calendar view="multiMonthYear"]
+```
+
+### Time Grid (Week)
+
+The Time Grid view shows a weekly time axis with hourly slots and positioned event blocks, including a "now" indicator line that tracks the current time.
+
+### List Views
+
+List (Week) and List (Month) views group events by day in a clean agenda format — ideal for reading rather than scanning. The Bricks editor renders server-side previews with real event data so you can design list views without switching to the frontend.
+
+### Multi-Month (Year)
+
+A compact year-at-a-glance overview rendering twelve mini month grids in a responsive grid. Days that contain events show a dot indicator.
+
+## Responsive View Switching
+
+Set different calendar views for tablet and mobile breakpoints. Leave a value empty to inherit the desktop view.
+
+```
+[lre_calendar view="dayGridMonth" tablet_view="listWeek" mobile_view="listMonth"]
+```
+
+You can also set defaults globally under **Recurring Events → Settings → Calendar → Default View / Tablet View / Mobile View**.
+
+## View Switcher
+
+Add an icon-triggered dropdown menu inside the navigation pill that lets visitors switch between calendar views.
+
+```
+[lre_calendar view_switcher="dayGridMonth,listWeek,multiMonthYear"]
+```
+
+The switcher accepts any comma-separated list of view IDs (see the [Calendar Views](#calendar-views) table). When omitted, no switcher is rendered. In the Bricks calendar element, this is exposed as a multi-select control.
+
+## URL Parameters
+
+The calendar reads several URL parameters so you can deep-link to a specific date, view, or event.
+
+| Parameter | Purpose | Example |
+| --- | --- | --- |
+| `lre_date` | Navigate to a specific month or day | `?lre_date=2026-06-01` |
+| `lre_start` | Alias for `lre_date` | `?lre_start=2026-06` |
+| `lre_view` | Set the initial calendar view | `?lre_view=listWeek` |
+| `lre_event` | Auto-open the offcanvas/popup for a specific event on load | `?lre_event=123&lre_date=2026-06-01` |
+| `{taxonomy}` | Filter events by any registered event taxonomy term | `?event_type=workshop` |
+
+URL parameters override shortcode attributes for view and date, making it easy to send people to "the next workshop in June" from outside the site.
+
+```
+https://example.com/events/?lre_view=listMonth&lre_date=2026-06&event_category=yoga
+```
 
 ## Theme Presets
 
@@ -101,6 +176,7 @@ Slides in a panel from the side with event details.
 ```
 
 The offcanvas panel shows:
+
 - Event title
 - Date and time
 - Featured image (optional)
@@ -175,34 +251,36 @@ Configure defaults in **Recurring Events → Settings → Calendar**:
 
 ### View Settings
 
-- **Week Starts On**: Sunday or Monday
-- **Default Height**: Auto or fixed
-- **Initial View**: Starting calendar view
+- **Default View** — Starting view on desktop (any of the five available views)
+- **Tablet View** — View used on tablet breakpoints (leave empty to inherit desktop)
+- **Mobile View** — View used on mobile breakpoints (leave empty to inherit desktop)
+- **Week Starts On** — Sunday or Monday
+- **Default Height** — Auto or fixed
 
 ### Theme & Styling
 
-- **Theme Preset**: Default theme for all calendars
-- **Custom Navigation Icons**: Upload custom arrow images
+- **Theme Preset** — Default theme for all calendars
+- **Custom Navigation Icons** — Upload custom arrow images
 
 ### Event Display
 
-- **Click Behavior**: Default offcanvas/link/none
-- **Show Featured Image**: In offcanvas panel
-- **Show Excerpt**: In offcanvas panel
-- **Show Time**: In offcanvas panel
-- **Button Text**: "View Event" button label
-- **Open in New Tab**: Link behavior
+- **Click Behavior** — Default offcanvas/link/none
+- **Show Featured Image** — In offcanvas panel
+- **Show Excerpt** — In offcanvas panel
+- **Show Time** — In offcanvas panel
+- **Button Text** — "View Event" button label
+- **Open in New Tab** — Link behavior
 
 ### Offcanvas Settings
 
-- **Position**: Left or Right
-- **Width**: Panel width (e.g., 400px)
-- **Background Color**: Panel background
-- **Text Color**: Auto-calculated for contrast
+- **Position** — Left or Right
+- **Width** — Panel width (e.g., 400px)
+- **Background Color** — Panel background
+- **Text Color** — Auto-calculated for contrast
 
 ### Default Display
 
-- **Default Display for [Post Type]**: Auto-enable calendar display for new posts
+- **Default Display for [Post Type]** — Auto-enable calendar display for new posts
 
 ## Per-Event Colors
 
@@ -217,6 +295,10 @@ You can change the color headings from here as well.
 ### Today Button
 
 The calendar header includes a "Today" button for quick return to the current month. On the mini calendar (Event Occurrences element), a dot button appears between the navigation arrows when viewing a different month.
+
+### Navigation Loading Overlay
+
+A spinner overlay covers the calendar grid during view transitions and stays visible until all events are fully rendered, eliminating the visual flicker that previously happened when switching months or views.
 
 ### Single-Event Day Shortcut (Mobile)
 
@@ -250,3 +332,5 @@ Use the `id` attribute to assign a custom identifier when placing multiple calen
 [lre_calendar id="yoga-cal" taxonomy="event_category" terms="yoga"]
 [lre_calendar id="fitness-cal" taxonomy="event_category" terms="fitness"]
 ```
+
+You can also filter by taxonomy via URL — append the taxonomy slug as a query parameter (see [URL Parameters](#url-parameters)).

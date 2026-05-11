@@ -1,5 +1,7 @@
 ---
 sidebar_position: 4
+title: Event Elements
+description: Specialized Bricks elements for displaying event information.
 ---
 
 # Event Elements
@@ -21,13 +23,31 @@ Display an interactive calendar as a native Bricks element with full visual cont
 All `[lre_calendar]` shortcode options are available as visual controls, organised into six groups:
 
 | Group | Controls |
-|-------|----------|
-| **Data Source** | Post type, taxonomy filter, terms |
-| **Calendar View** | Initial view, height, week start day |
+| --- | --- |
+| **Data Source** | Post type, taxonomy filter, terms, compound multi-taxonomy filter |
+| **Calendar View** | Default view, Tablet view, Mobile view, View switcher, height, week start day |
 | **Appearance** | Theme preset, primary color, event colors |
 | **Behaviour** | Event click action (offcanvas, link, popup, none), open in new tab |
 | **Header Filter** | Native filter taxonomy, display mode (pills, buttons, dropdown) |
 | **Advanced** | Custom CSS class, calendar ID |
+
+### Calendar Views
+
+The Default View, Tablet View, and Mobile View dropdowns each expose all five available views:
+
+| View | Use For |
+| --- | --- |
+| **Month Grid** (`dayGridMonth`) | Default monthly overview |
+| **List (Week)** | Day-grouped agenda for the current week |
+| **List (Month)** | Day-grouped agenda spanning a full month |
+| **Time Grid (Week)** | Weekly time axis with hourly slots and a now indicator |
+| **Multi-Month (Year)** | Year-at-a-glance with 12 mini month grids |
+
+Set **Tablet View** or **Mobile View** to "Same as desktop" to inherit the Default View at that breakpoint, or pick a different view to switch automatically on smaller screens.
+
+### View Switcher
+
+The **View Switcher** control is a multi-select of view IDs. Pick any combination — say, Month Grid, List (Week), and Multi-Month (Year) — and an icon-triggered dropdown appears inside the navigation pill on the frontend, letting visitors switch views without leaving the page.
 
 ### Bricks Popup Support
 
@@ -45,7 +65,7 @@ Popup support also works with the `[lre_calendar]` shortcode: `[lre_calendar eve
 
 ### Editor Preview
 
-The Bricks editor renders a complete server-side calendar preview with real event data. You can configure and style the calendar without switching to the frontend.
+The Bricks editor renders a complete server-side calendar preview with real event data — including List (Week) and List (Month) views, which render server-side previews with real event data. You can configure and style the calendar without switching to the frontend.
 
 ### AJAX Lifecycle Support
 
@@ -73,16 +93,17 @@ Shows occurrences as a formatted list.
 **List Settings:**
 
 | Setting | Description |
-|---------|-------------|
+| --- | --- |
 | **Layout** | Vertical or Horizontal |
 | **Show Weekday** | Display day name |
-| **Show Time** | Display event time |
+| **Show Time** | Display event time per occurrence (uses per-weekday and per-occurrence time overrides where set) |
 | **Max Items** | Limit number shown |
 | **Link Dates** | Make dates clickable |
 | **Separator Style** | Line between items (solid, dashed, dotted, double) |
 | **Separator Color** | Line color |
 
 **Styling Controls:**
+
 - Container: width, padding, background, border, border radius
 - Item: padding, gap between items
 - Typography: separate controls for date, weekday, and time
@@ -96,12 +117,13 @@ Shows a compact monthly calendar highlighting occurrence dates.
 **Calendar Settings:**
 
 | Setting | Description |
-|---------|-------------|
+| --- | --- |
 | **Dot Color** | Color of occurrence indicators |
 | **Show Navigation** | Prev/Next month arrows |
 | **Custom Arrow Icons** | Use your uploaded calendar arrows |
 
 **Styling Controls:**
+
 - Width and padding
 - Day cell backgrounds (normal, today, occurrence)
 - Typography for headers and dates
@@ -110,9 +132,9 @@ Shows a compact monthly calendar highlighting occurrence dates.
 ### Common Settings
 
 | Setting | Description |
-|---------|-------------|
+| --- | --- |
 | **Number of Occurrences** | How many dates to show (max 375, or 0 for all) |
-| **Exclude Current** | Hide the currently viewed occurrence |
+| **Exclude Current** | Hide the currently viewed occurrence; remaining occurrences shown are those *after* the one being viewed |
 | **Empty Message** | Text when no upcoming dates |
 | **Date Format** | PHP date format string |
 
@@ -158,7 +180,7 @@ Minimal badge-style display for event cards:
 ### Content Settings
 
 | Setting | Description |
-|---------|-------------|
+| --- | --- |
 | **Display Mode** | Smart Label, Countdown Units, or Compact Badge |
 | **Show Days** | Toggle days unit |
 | **Show Hours** | Toggle hours unit |
@@ -171,7 +193,7 @@ Full control over typography, colors, spacing, and per-unit styling. Status-awar
 
 Styling controls are available in both Countdown Units and Compact Badge modes.
 
-See [Countdown & Relative Time](../features/countdown) for full details.
+See [Countdown & Relative Time](/features/countdown) for full details.
 
 ---
 
@@ -188,7 +210,7 @@ Add pagination to your Recurring Events query loops.
 ### Settings
 
 | Setting | Description |
-|---------|-------------|
+| --- | --- |
 | **Target Query** | Which query loop to paginate |
 | **Show Page Numbers** | Display numbered page links |
 | **Show Prev/Next** | Navigation arrows |
@@ -199,6 +221,7 @@ Add pagination to your Recurring Events query loops.
 ### Styling
 
 Full control over:
+
 - Button/number appearance
 - Active page styling
 - Hover states
@@ -237,7 +260,10 @@ Full control over:
 ### Responsive Design
 
 Use Bricks' responsive controls to adjust:
+
 - Number of columns in query loops
 - Filter layout (row → column on mobile)
 - Typography sizes
 - Spacing
+
+For the calendar element specifically, prefer the built-in **Tablet View** and **Mobile View** controls (under Calendar View) over manual responsive overrides — they automatically swap the calendar's render mode at each breakpoint.
