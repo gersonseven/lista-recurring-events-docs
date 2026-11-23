@@ -134,9 +134,21 @@ Shows a compact monthly calendar highlighting occurrence dates.
 | Setting | Description |
 | --- | --- |
 | **Number of Occurrences** | How many dates to show (max 375, or 0 for all) |
-| **Exclude Current** | Hide the currently viewed occurrence; remaining occurrences shown are those *after* the one being viewed |
-| **Empty Message** | Text when no upcoming dates |
+| **Show Which Dates** | Which dates the list contains. See below |
+| **Empty Message** | Text when there are no dates to show. If left blank, the text matches the mode: "No upcoming dates", "No further dates" or "No other dates" |
 | **Date Format** | PHP date format string |
+
+#### Show Which Dates
+
+| Option | Lists |
+| --- | --- |
+| **Upcoming dates** | Future dates from today. The default |
+| **Next dates after the one being viewed** | Dates after the occurrence in the page address. Use it for a "what's next" section on a single event page |
+| **All other dates** | Every date of the event except the one being viewed, including past dates |
+
+The last two read the date from the page address, `?lre_date=` or the older `?occurrence=`. Without one, they list upcoming dates.
+
+This control replaced the **Exclude Current** checkbox in 1.7.7. Elements that had the checkbox switched on now use "Next dates after the one being viewed".
 
 ### Use Cases
 

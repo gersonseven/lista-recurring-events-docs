@@ -61,6 +61,19 @@ After fixing date issues:
 2. Clear any page caching plugins
 3. Test in an incognito browser
 
+### Update to 1.7.9 or Later
+
+Version 1.7.9 fixed several date faults. If you see any of these, update first:
+
+- The last date of a series that ends on a date is missing
+- An event repeating every 2 or more weeks is a week out from January 2027
+- A single event page keeps showing a date that has passed, with Cache Duration set to **No caching**
+- An event that has not started yet shows a next date earlier than its first date
+
+After updating, open any page in the WordPress admin as an administrator. The stored dates of all published events are rebuilt once, and a notice confirms it. See the [changelog](/changelog/v1-7-9) for the detail.
+
+If you cannot update straight away and Cache Duration is set to **No caching**, set it to **15 minutes** and click **Clear All Cache**.
+
 ---
 
 ## Bricks Dynamic Tags Not Appearing
@@ -244,7 +257,7 @@ yoursite.com/event/yoga/?lre_date=2026-01-15
 
 1. **Enable Debug Mode**: Add `?lre_debug=1` to your URL
 2. **Check Debug Log**: Go to Settings → Debug tab (if enabled)
-3. **Contact Support**: Visit [listapage.au](https://listapage.au) with:
+3. **Contact Support**: Use the [support form](https://listarecurringevents.com/support/) with:
    - WordPress version
    - PHP version
    - Plugin version

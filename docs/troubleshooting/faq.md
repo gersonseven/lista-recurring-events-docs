@@ -46,7 +46,7 @@ Yes. Configure your post type(s) in the plugin settings. The only requirement is
 
 ### Can I use one license on multiple sites?
 
-License terms depend on your purchase. Check your license details at [listapage.au](https://listapage.au).
+License terms depend on your purchase. Check your license details in your account at [listarecurringevents.com](https://listarecurringevents.com/account/).
 
 ### What happens when my license expires?
 

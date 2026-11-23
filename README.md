@@ -1,41 +1,51 @@
-# Website
+# Lista Recurring Events - documentation
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+The documentation and changelog for the Lista Recurring Events WordPress plugin, published at https://docs.listarecurringevents.com.
 
-## Installation
+Built with [Docusaurus](https://docusaurus.io/).
 
-```bash
-yarn
+## Where things are
+
+| Folder | What it holds |
+| --- | --- |
+| `docs/` | The documentation pages. The sidebar is generated from the folder structure |
+| `changelog/` | One Markdown file per release, shown at `/changelog` |
+| `static/img/` | Images used in the pages |
+
+## Adding a release to the changelog
+
+Create `changelog/YYYY-MM-DD-vX.Y.Z-short-name.md`:
+
+```md
+---
+title: Version X.Y.Z - Short title
+description: One or two sentences for the list page and search engines.
+date: YYYY-MM-DD
+tags:
+  - Fix
+slug: vX-Y-Z
+---
+
+A one-paragraph summary.
+
+<!-- truncate -->
+
+The full notes.
 ```
 
-## Local Development
+Curly braces and angle brackets must sit inside backticks or a code block, for example `{lre_next_date}`. Outside code they break the build.
+
+## Local development
 
 ```bash
-yarn start
+npm install
+npm start
 ```
-
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
 ## Build
 
 ```bash
-yarn build
+npm run build
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-## Deployment
-
-Using SSH:
-
-```bash
-USE_SSH=true yarn deploy
-```
-
-Not using SSH:
-
-```bash
-GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+The build fails on broken internal links, so run it before pushing.
