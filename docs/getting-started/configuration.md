@@ -64,10 +64,15 @@ Enter the field name that stores your event's start time. This is used for:
 
 ### Cache Duration
 
-How long to cache occurrence calculations. Default is **1 hour (3600 seconds)**.
+How long to cache occurrence calculations. The options are **No caching**, **15 minutes**, **1 hour** (the default), **6 hours** and **24 hours**.
 
 - **Shorter duration**: More real-time but slightly slower
 - **Longer duration**: Better performance but delayed updates
+- **No caching**: Dates are calculated on every view
+
+:::caution Before 1.7.9
+In versions before 1.7.9, **No caching** did the opposite of its name: an event's next date was stored the first time it was viewed and never refreshed. Update to 1.7.9 or later, or choose **15 minutes** and click **Clear All Cache**.
+:::
 
 ### Clear Cache
 
@@ -76,6 +81,16 @@ Click **Clear All Cache** to immediately clear cached calculations. Useful when:
 - Testing recurrence pattern changes
 - Troubleshooting display issues
 - After bulk importing events
+
+## Dynamic Tags
+
+### Default Empty Message
+
+The text the `{lre_occurrences}` tag shows when an event has no dates to list, for example "No upcoming dates this term". Leave it blank and the tag outputs nothing, which is the original behaviour.
+
+A single tag can set its own message, which takes priority over this default. See [Empty message](../bricks-builder/dynamic-tags#empty-message). The Empty Message field on the LRE Event Occurrences element is separate and is not affected by this setting.
+
+Added in 1.7.7.3, and available to everyone from 1.7.9.
 
 ## Default Occurrences
 

@@ -8,7 +8,7 @@ Learn how to install Lista Recurring Events on your WordPress site.
 
 ## Download the Plugin
 
-1. Purchase the plugin from [listapage.au](https://listapage.au/custom-wordpress-plugins/recurring-events/)
+1. Purchase the plugin from [listarecurringevents.com](https://listarecurringevents.com/)
 2. Once you are logged into your account, you can download Lista Recurring Events plugin from the Downloads tab.
 
 ![Plugin Download](/img/account-page-download.jpg)

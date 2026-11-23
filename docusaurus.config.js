@@ -20,7 +20,7 @@ const config = {
   },
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://docs.listarecurringevents.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -51,7 +51,18 @@ const config = {
           // Remove or update this to your repo
           // editUrl: 'https://github.com/your-org/your-repo/tree/main/',
         },
-        blog: false, // Disable blog
+        // The blog plugin is used as the changelog: one Markdown file per release in /changelog.
+        blog: {
+          path: 'changelog',
+          routeBasePath: 'changelog',
+          blogTitle: 'Changelog',
+          blogDescription: 'Release notes for Lista Recurring Events',
+          blogSidebarTitle: 'Releases',
+          blogSidebarCount: 'ALL',
+          postsPerPage: 10,
+          showReadingTime: false,
+          onUntruncatedBlogPosts: 'ignore',
+        },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -81,13 +92,13 @@ const config = {
               label: 'Documentation',
             },
             {
-              href: 'https://lre-changelog.listapage.au',
+              to: '/changelog',
               label: 'Changelog',
               position: 'left',
             },
             {
-              href: 'https://listapage.au/custom-wordpress-plugins/recurring-events/',
-              label: 'LRE Landing Page',
+              href: 'https://listarecurringevents.com/',
+              label: 'Lista Recurring Events',
               position: 'right',
             },
           ],
@@ -134,7 +145,7 @@ const config = {
               items: [
                 {
                   label: 'Changelog',
-                  href: 'https://lre-changelog.listapage.au',
+                  to: '/changelog',
                 },
                 {
                   label: 'Developers',

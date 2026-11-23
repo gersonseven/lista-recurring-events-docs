@@ -42,7 +42,32 @@ In any Bricks text element or dynamic field:
 |-----|--------|---------|
 | `{lre_occurrences}` | All occurrences (comma-separated) | "Jan 15, Jan 22, Jan 29" |
 | `{lre_occurrences:5}` | First 5 occurrences | "Jan 15, Jan 22, Jan 29, Feb 5, Feb 12" |
+| `{lre_occurrences:5:next_after_current}` | The next 5 dates after the one being viewed | "Jan 22, Jan 29, Feb 5, Feb 12, Feb 19" |
+| `{lre_occurrences:5:all_others}` | Up to 5 dates of the event other than the one being viewed, including past dates | "Jan 8, Jan 22, Jan 29, Feb 5, Feb 12" |
 | `{lre_occurrences_count}` | Total count | "12" |
+
+#### Which dates the tag lists
+
+The part after the limit chooses the dates. It was added in 1.7.7.
+
+| Mode | Lists |
+|------|-------|
+| *(none)* or `upcoming` | Future dates from today |
+| `next_after_current` | Dates after the occurrence in the page address |
+| `all_others` | Every date except the one being viewed, including past dates |
+
+"The one being viewed" comes from the date in the page address, `?lre_date=2026-01-15` or the older `?occurrence=2026-01-15`. Without a date in the address, both modes list upcoming dates.
+
+#### Empty message
+
+When there are no dates to list, the tag outputs nothing by default. There are two ways to show a message. Both need 1.7.9 or later.
+
+- **For every tag:** set **Default Empty Message** under **Recurring Events → Settings → Dynamic Tags**.
+- **For one tag:** add `||` and your text to the end of the tag. This takes priority over the default.
+
+```
+{lre_occurrences:5:next_after_current||No further dates this term}
+```
 
 ### Field Override Tags
 
@@ -166,6 +191,8 @@ yoursite.com/event/yoga-class/?lre_date=2026-01-15
 ```
 
 When accessed with this parameter, tags display data for that specific occurrence.
+
+The older `?occurrence=2026-01-15` form is also recognised by the Bricks tags and the LRE Event Occurrences element. If both are present, `lre_date` is used.
 
 Without the parameter, tags show the next upcoming occurrence.
 

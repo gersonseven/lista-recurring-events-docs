@@ -69,7 +69,7 @@ Lista Recurring Events offers both free and licensed functionality:
 - Schema.org structured data
 - Native Events Mode
 
-[Purchase a license →](https://listapage.au/custom-wordpress-plugins/recurring-events/)
+[Lista Recurring Events website →](https://listarecurringevents.com/)
 
 ## Quick Start
 
@@ -81,4 +81,4 @@ Ready to get started? Follow these steps:
 
 ---
 
-**Need help?** Check the [Troubleshooting](./troubleshooting/common-issues) section or contact support at [listapage.au](https://listapage.au).
+**Need help?** Check the [Troubleshooting](./troubleshooting/common-issues) section or contact [support](https://listarecurringevents.com/support/).
